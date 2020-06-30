@@ -1,27 +1,27 @@
-#include <GL/freeglut.h>
-#include <GL/gl.h>
+/*
+ * GLUT - The OpenGL Utility Toolkit (Graphics)
+ * SDL - Simple DirectMedia Layer (Sound)
+ */
 
-void renderFunction() {
-  glClearColor(0.0, 0.0, 0.0, 0.0);
-  glClear(GL_COLOR_BUFFER_BIT);
-  glColor3f(1.0, 1.0, 1.0);
-  glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-  glBegin(GL_POLYGON);
-  glVertex2f(-0.5, -0.5);
-  glVertex2f(-0.5, 0.5);
-  glVertex2f(0.5, 0.5);
-  glVertex2f(0.5, -0.5);
-  glEnd();
-  glFlush();
-}
+#include "chip8.h"
+#include "io.h"
+
+Chip8 chip8;
+IO io;
 
 int main(int argc, char **argv) {
-  glutInit(&argc, argv);
-  glutInitDisplayMode(GLUT_SINGLE);
-  glutInitWindowSize(500, 500);
-  glutInitWindowPosition(100, 100);
-  glutCreateWindow("OpenGL - First window demo");
-  glutDisplayFunc(renderFunction);
-  glutMainLoop();
-  return 0;
+  io.setup_graphics();
+  io.setup_input();
+
+  chip8.init();
+  chip8.load_game("pong");
+  
+  while (true) {
+    chip8.emulate_cycle();
+
+    if (chip8.draw_flag)
+      io.draw_graphics();
+
+    chip8.set_keys();
+  }
 }
