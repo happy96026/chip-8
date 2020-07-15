@@ -22,4 +22,4 @@ class Chip8 {
     bool draw_flag;
     void init();
     void emulate_cycle();
-}
+};
