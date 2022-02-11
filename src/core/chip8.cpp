@@ -1,4 +1,5 @@
-#include "chip8.h"
+#include <iostream>
+#include "core/chip8.hpp"
 
 void Chip8::initialize() {
   pc = 0x200;
@@ -30,8 +31,10 @@ void Chip8::initialize() {
     0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
     0xF0, 0x80, 0xF0, 0x80, 0x80  // F
   };
-  for (int i = 0; i < 80; i++)
-    memory[i] = chip8FontSet[i];
+  // for (int i = 0; i < 80; i++)
+  //   memory[i] = chip8FontSet[i];
+  std::cout << "Hello World!" << std::endl;
+
 }
 
 void Chip8::emulateCycle() {

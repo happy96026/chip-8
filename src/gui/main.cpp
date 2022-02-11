@@ -4,11 +4,11 @@
  */
 
 #include <iostream>
-#include "src/chip8.h"
+#include "core/chip8.hpp"
 
 Chip8 chip8;
 
 int main() {
-  std::cout << "Hello World!" << std::endl;
+  chip8.initialize();
   return 0;
 }
